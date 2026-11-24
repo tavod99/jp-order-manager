@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cấu hình — Mercari/Yahoo Order Manager</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; max-width: 480px; margin: 24px auto; }
+    label { display: block; font-size: 13px; margin-top: 14px; margin-bottom: 4px; font-weight: 600; }
+    input { width: 100%; padding: 6px 8px; font-size: 13px; box-sizing: border-box; }
+    button { margin-top: 16px; padding: 8px 16px; background: #1a73e8; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+    .status { margin-top: 10px; font-size: 12px; }
+    .hint { font-size: 12px; color: #666; }
+  </style>
+</head>
+<body>
+  <h2>Cấu hình kết nối Apps Script</h2>
+  <p class="hint">Lấy Web App URL ở bước "Deploy" và secret đã đặt bằng <code>setApiSecretOnce</code> trong Apps Script (xem apps-script/README.md).</p>
+
+  <label for="apps-script-url">Apps Script Web App URL</label>
+  <input id="apps-script-url" type="text" placeholder="https://script.google.com/macros/s/.../exec" />
+
+  <label for="api-secret">Shared secret</label>
+  <input id="api-secret" type="password" placeholder="Secret đã đặt trong Apps Script" />
+
+  <button id="save-btn">Lưu</button>
+  <div id="status" class="status"></div>
+
+  <script src="options.js"></script>
+</body>
+</html>

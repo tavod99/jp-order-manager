@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tokuda Managa — Order Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="logo">
+        <rect width="24" height="24" rx="6" fill="#5046e5"></rect>
+        <rect x="4" y="4" width="7" height="10" rx="1.5" fill="white" opacity=".9"></rect>
+        <rect x="13" y="4" width="7" height="4.5" rx="1.5" fill="white" opacity=".9"></rect>
+        <rect x="13" y="10.5" width="7" height="3.5" rx="1.5" fill="white" opacity=".5"></rect>
+        <rect x="4" y="16" width="16" height="4" rx="1.5" fill="white" opacity=".3"></rect>
+      </svg>
+      <div class="brand">
+        <div class="brand-name">Tokuda Managa</div>
+        <div class="brand-sub">Order Manager</div>
+      </div>
+      <a href="#" id="options-link" class="settings-link" title="Cấu hình Apps Script URL / Secret">⚙</a>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="save">Lưu SP</button>
+      <button class="tab-btn" data-tab="pending">Chờ xử lý</button>
+      <button class="tab-btn" data-tab="customers">Khách hàng</button>
+      <button class="tab-btn" data-tab="search">Tìm kiếm</button>
+      <button class="tab-btn" data-tab="admin">Công cụ</button>
+    </nav>
+
+    <main class="content">
+      <section id="tab-save" class="tab-section active">
+        <div id="save-preview"></div>
+        <p id="save-hint" class="hint">Mở trang sản phẩm Mercari, Yahoo Auctions, PayPay Fleamarket, Yahoo Shopping, Amazon, Rakuten hoặc Rakuma, rồi bấm nút bên dưới.</p>
+        <button id="save-btn" class="btn-primary btn-block">Lưu sản phẩm</button>
+        <div class="shortcut-wrap"><span class="shortcut-badge">⌘ + Shift + S</span></div>
+        <div id="save-status" class="status-box" hidden></div>
+      </section>
+
+      <section id="tab-pending" class="tab-section">
+        <div class="toolbar-row">
+          <span id="pending-count" class="muted-label">0 sản phẩm chờ xử lý</span>
+          <button id="refresh-pending-btn" class="btn-ghost-sm">↻ Làm mới</button>
+        </div>
+        <div id="pending-list"></div>
+        <div id="pending-order-status" class="status-box status-ok" hidden></div>
+      </section>
+
+      <section id="tab-customers" class="tab-section">
+        <div class="card">
+          <p class="card-label">Thêm khách mới</p>
+          <input type="text" id="cust-name" placeholder="Tên khách *" autocomplete="off" />
+          <input type="text" id="cust-address" placeholder="Địa chỉ nhận hàng tại Nhật *" autocomplete="off" />
+          <input type="text" id="cust-phone" placeholder="Số điện thoại (tùy chọn)" autocomplete="off" />
+          <input type="text" id="cust-fee" placeholder="Phí (%) — ví dụ 2 (tùy chọn)" autocomplete="off" />
+          <input type="text" id="cust-note" placeholder="Ghi chú (tùy chọn)" autocomplete="off" />
+          <button id="create-customer-btn" class="btn-primary btn-block-sm">Tạo khách hàng</button>
+          <p id="create-customer-status" class="inline-status" hidden></p>
+        </div>
+        <div class="toolbar-row">
+          <span id="customer-count" class="muted-label">0 khách hàng</span>
+        </div>
+        <div id="customers-list"></div>
+      </section>
+
+      <section id="tab-search" class="tab-section">
+        <div class="search-row">
+          <input type="text" id="search-input" placeholder="Tên khách / mã / tracking / link..." />
+          <button id="search-btn" class="btn-primary">Tìm</button>
+        </div>
+        <div id="search-results"></div>
+      </section>
+
+      <section id="tab-admin" class="tab-section">
+        <div class="card">
+          <p class="card-label">Cập nhật thủ công</p>
+          <button id="update-tracking-btn" class="btn-primary btn-block-sm">↻ Cập nhật tracking ngay</button>
+          <p class="hint">Kích hoạt quét trạng thái vận chuyển chạy nền. Kết quả cập nhật vào sheet/TrackingLog sau khoảng 1–2 phút (không cần giữ popup mở).</p>
+          <button id="refresh-vcb-btn" class="btn-primary btn-block-sm">¥ Cập nhật tỷ giá VCB ngay</button>
+          <p class="hint">Lấy tỷ giá bán JPY mới nhất và lưu lại để dùng khi tạo đơn.</p>
+          <div id="admin-status" class="status-box" hidden></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <div class="app-footer-row">
+        <span class="footer-brand">TOKUDA MANAGA</span>
+        <span class="footer-version">v0.2.0</span>
+      </div>
+      <div class="app-credit">
+        Developed by <a href="https://t.me/nwexyz" target="_blank" rel="noopener">@nwexyz</a> on Telegram
+      </div>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

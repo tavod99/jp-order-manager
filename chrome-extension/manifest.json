@@ -1,0 +1,100 @@
+{
+  "manifest_version": 3,
+  "name": "Mercari/Yahoo Order Manager",
+  "version": "0.3.0",
+  "description": "Lưu sản phẩm Mercari/Yahoo Auction tự động vào Google Sheets, quản lý khách hàng và tracking.",
+  "permissions": ["storage", "notifications", "activeTab", "scripting"],
+  "host_permissions": [
+    "https://script.google.com/*",
+    "https://script.googleusercontent.com/*",
+    "https://jp.mercari.com/*",
+    "https://auctions.yahoo.co.jp/*",
+    "https://paypayfleamarket.yahoo.co.jp/*",
+    "https://store.shopping.yahoo.co.jp/*",
+    "https://www.amazon.co.jp/*",
+    "https://item.rakuten.co.jp/*",
+    "https://item.fril.jp/*",
+    "https://allu-official.com/*",
+    "https://www.trefac.jp/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://jp.mercari.com/item/*"],
+      "js": ["content-scripts/mercari.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://jp.mercari.com/shops/product/*"],
+      "js": ["content-scripts/mercari-shops.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://auctions.yahoo.co.jp/jp/auction/*"],
+      "js": ["content-scripts/yahoo.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://paypayfleamarket.yahoo.co.jp/item/*"],
+      "js": ["content-scripts/paypayfleamarket.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://store.shopping.yahoo.co.jp/*"],
+      "js": ["content-scripts/yahooshopping.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://www.amazon.co.jp/*"],
+      "js": ["content-scripts/amazon.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://item.rakuten.co.jp/*"],
+      "js": ["content-scripts/rakuten.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://item.fril.jp/*"],
+      "js": ["content-scripts/rakuma.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://allu-official.com/*/market/items/*"],
+      "js": ["content-scripts/allu.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://www.trefac.jp/store/*/*/"],
+      "js": ["content-scripts/trefac.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Mercari/Yahoo Order Manager",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "options_page": "options/options.html",
+  "commands": {
+    "save-product": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Lưu sản phẩm đang xem vào Google Sheets"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
